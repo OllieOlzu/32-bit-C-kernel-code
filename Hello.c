@@ -1,4 +1,4 @@
-// EXAMPLE C CODE
+//Uses VGA text mode to display HELLO on a centerd 7x3 blue square. You can run these on Linux at https://github.com/OllieOlzu/Easy-32-bit-C-kernel-to-ISO.
 
 #include <stdint.h>
 #define V ((uint16_t*)0xB8000)
