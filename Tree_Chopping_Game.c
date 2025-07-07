@@ -325,6 +325,8 @@ void kernel_main() {
             itoa(score, scoreText); // Convert score to string
             print(-23, 5, scoreText, 0x0F, 0x01); // Show it
 
+            print(-35, 2, "Press A or D to play!", 0x0F, 0x01); // Show message
+
 
 
             F = 4; // Branch level starts at 4
