@@ -1,5 +1,5 @@
 // It's pretty self-explainatory, but when the screen goes green press the space bar to mesure your reaction speed.
-// It's not very acurate though, as the first time it is much faster and the timing can go very high, but as you go it gets slower.
+// It's doe'snt tell you how meany milliseconds have past though, just increments till you press space
 // You can run these on Linux at https://github.com/OllieOlzu/Easy-32-bit-C-kernel-to-ISO.
 
 
@@ -8,8 +8,16 @@
 
 #define V ((uint16_t*)0xB8000)
 #define inb(p) ({ uint8_t r; __asm__ volatile ("inb %1, %0" : "=a"(r) : "Nd"(p)); r; })
+#define outb(port, val) __asm__ volatile ("outb %0, %1" : : "a" ((uint8_t)(val)), "Nd" (port))
 #define HIGHT 24
 #define LENTH 80
+
+static void reboot() {
+    uint8_t good = 0x02;
+    while (good & 0x02)
+        good = inb(0x64);
+    outb(0x64, 0xFE); // Send CPU reset command
+}
 
 void display(int X, int Y, uint8_t L, uint8_t fg, uint8_t bg) {
     int y = (HIGHT / 2) - Y;
@@ -127,6 +135,7 @@ void kernel_main() {
 
     print(0, 0, "Now!", 0x0F, MidColor); // Show message
 
+    i = 0;
     while (inb(0x60) != key) {
         i++;
     }
@@ -141,12 +150,12 @@ void kernel_main() {
     print(3, 1, scoreText, 0x0F, EndColor); // Show it
     print(-7, 0, "X 10,000 clock cycles!", 0x0F, EndColor); // Show it
 
-    print(-9, -1, "Press space bar to restart!", 0x0F, EndColor); // Show it
+    print(-8, -1, "Press space bar to exit!", 0x0F, EndColor); // Show it
 
     while (inb(0x60) == key); //Wait for space bar to be released
 
     while (inb(0x60) != key); //Wait for space bar
 
-    kernel_main(); // Restart the game
+    reboot();
 
 }
