@@ -121,7 +121,7 @@ void kernel_main() {
     int EndColor = 0x03;
     int i;
 
-    int key = 0x39; // Key code for A but you can change this
+    int key = 0x39; // Key code for space but you can change this
     
     fill(219, StartColor, 0x00);
     drawLogo(27, 10, 0x0F, StartColor);
