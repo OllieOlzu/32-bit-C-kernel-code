@@ -1,5 +1,6 @@
 // It's pretty self-explainatory, but when the screen goes green press the space bar to mesure your reaction speed.
 // It's doe'snt tell you how meany milliseconds have past though, just increments till you press space
+// If you have a slower computer it may not work since it might not even reach 10,000 cycles
 // You can run these on Linux at https://github.com/OllieOlzu/Easy-32-bit-C-kernel-to-ISO.
 
 
