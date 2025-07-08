@@ -7,11 +7,18 @@
 
 #define V ((uint16_t*)0xB8000)
 #define inb(p) ({ uint8_t r; __asm__ volatile ("inb %1, %0" : "=a"(r) : "Nd"(p)); r; })
+#define outb(port, val) __asm__ volatile ("outb %0, %1" : : "a" ((uint8_t)(val)), "Nd" (port))
 #define HIGHT 24
 #define LENTH 80
 int score = 0; // Initialize score
 int F; // Global variable for branch level
 
+static void reboot() {
+    uint8_t good = 0x02;
+    while (good & 0x02)
+        good = inb(0x64);
+    outb(0x64, 0xFE); // Send CPU reset command
+}
 
 char Branches[50];
 unsigned int rand_seed = 12345;
@@ -103,18 +110,7 @@ void print(int X, int Y, const char* word, uint8_t fg, uint8_t bg) {
     }
 }
 
-void gameover() {
-    fill(219, 0x00, 0x00);    // Clear screen with black
-    print(-10, 0, "Game Over! You scored ", 0x0F, 0x00); // Message
 
-    char scoreText[12];
-    itoa(score, scoreText); // Convert score to string
-    print(12, 0, scoreText, 0x0F, 0x00); // Show it
-    print(-12, -1, "Press space bar to restart!", 0x0F, 0x00); // Show it
-
-    while (inb(0x60) != 0x39); // Wait for space
-    kernel_main(); // Restart game
-}
 
 void guyOnLeft() {
     rec(-9, -7, 2, 1, 219, 0x0E, 0x00); // Draw right arm
@@ -182,6 +178,19 @@ void itoa(int num, char* buffer) { // Yeah I got this function from chatGPT, I d
         buffer[j] = buffer[i - j - 1];
         buffer[i - j - 1] = tmp;
     }
+}
+
+void gameover() {
+    fill(219, 0x00, 0x00);    // Clear screen with black
+    print(-10, 0, "Game Over! You scored ", 0x0F, 0x00); // Message
+
+    char scoreText[12];
+    itoa(score, scoreText); // Convert score to string
+    print(12, 0, scoreText, 0x0F, 0x00); // Show it
+    print(-10, -1, "Press space bar to exit!", 0x0F, 0x00); // Show it
+
+    while (inb(0x60) != 0x39); // Wait for space
+    reboot(); // Reboot CPU 
 }
 
 void drawLogo() { // Hehe ascii art I couldnt resist
