@@ -7,7 +7,7 @@ I apoligise for my spelling I'm like 13, I write these myself (Not using chatGPT
 
 # NOTES:
 
-If you have used https://github.com/OllieOlzu/Easy-32-bit-C-kernel-to-ISO to run these, the way all of these scripts (Apart from the ones that don't restart) restart is by rebooting the CPU, which works fine if you have the preset I made for grub.cfg, but if you add another bin file for grub to boot it will land you in the grub GUI instead of restarting the game. If you want to add this to your own scripts, here's how to:
+If you have used https://github.com/OllieOlzu/Easy-32-bit-C-kernel-to-ISO to run these, the way all of these scripts (Apart from the ones that don't restart) restart is by rebooting the CPU, which works fine if you have the preset I made for grub.cfg, but if you add another bin file for grub to boot it will land you in the grub GUI instead of restarting the game. If you want to just make the individual game restart, you can usaly just change reboot(); to kernel_main();. If you want to add CPU reboot to your own scripts, here's how to:
 
 At the top, add this:
 
