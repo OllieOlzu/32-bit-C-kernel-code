@@ -7,7 +7,7 @@ I apoligise for my spelling I'm like 13, I write these myself (Not using chatGPT
 
 # NOTES:
 
-If you have used https://github.com/OllieOlzu/Easy-32-bit-C-kernel-to-ISO to run these, but want an easy way to get back to the grub menu, you can use this to restart the CPU:
+If you have used https://github.com/OllieOlzu/Easy-32-bit-C-kernel-to-ISO to run these, the way the restart works is by rebooting the CPU, so if you add another bin file for grub to boot it will land you there instead of restarting the game. If you want to add this to your own scripts, here's how to:
 
 At the top, add this:
 
@@ -24,4 +24,4 @@ Add this function below it somewhere:
 
 And then simply run it with
 
-    reset();
+    reboot();
