@@ -1,3 +1,7 @@
+// Im sceard now, I want onto deepseek and it gave me this code that works perfectly
+// All programmers are gonna be gone in the future
+// Like what can A programmer do that an AI can't
+
 #include <stdint.h>
 #include <stddef.h>
 
