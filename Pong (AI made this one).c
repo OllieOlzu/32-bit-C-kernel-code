@@ -1,6 +1,6 @@
-// Im sceard now, I want onto deepseek and it gave me this code that works perfectly
+// Im sceard now, I went onto deepseek and it gave me this code that works perfectly
 // All programmers are gonna be gone in the future
-// Like what can A programmer do that an AI can't
+// Like what can a programmer do that an AI can't
 
 #include <stdint.h>
 #include <stddef.h>
@@ -70,8 +70,6 @@ void draw_game() {
     for (int i = 0; score_str[i]; i++) {
         put_char(score_str[i], COLOR_WHITE, VGA_WIDTH/2 - 5 + i, 1);
     }
-    
-    put_char('-', COLOR_WHITE, VGA_WIDTH/2, 1);
     
     itoa(enemy_score, score_str, 10);
     for (int i = 0; score_str[i]; i++) {
